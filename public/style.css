@@ -1,0 +1,217 @@
+/* style.css */
+
+body {
+    font-family: 'Segoe UI', 'Roboto', Helvetica, Arial, sans-serif;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    box-sizing: border-box;
+    color: #fff;
+    overflow: hidden;
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 350px;
+}
+
+.login-box {
+    background-color: #000;
+    border: 1px solid #262626;
+    border-radius: 1px;
+    padding: 20px 0;
+    text-align: center;
+    margin-bottom: 6px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.logo {
+    font-family: 'Grand Hotel', cursive;
+    font-size: 52px;
+    margin: 18px auto 14px;
+    font-weight: normal;
+    color: #fff;
+}
+
+/* Form inputs and button */
+form {
+    padding: 0 40px;
+    margin-top: 16px;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px 8px;
+    background-color: #262626;
+    border: 1px solid #363636;
+    border-radius: 3px;
+    font-size: 14px;
+    box-sizing: border-box;
+    color: #fff;
+    margin-bottom: 8px;
+}
+
+input::placeholder {
+    color: #a8a8a8;
+}
+
+input:focus {
+    outline: none;
+    border-color: #555;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 8px;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    /* * IMPORTANT CHANGE HERE:
+     * Adjusted 'top' to a fixed pixel value for better vertical alignment.
+     * This aims to place the text roughly in the middle of the input field's height.
+     */
+    top: 12px; 
+    transform: none; /* REMOVE transform: translateY(-50%) as it's no longer needed with fixed 'top' */
+    cursor: pointer;
+    color: #8e8e8e;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1; /* Ensure consistent line height for text */
+}
+
+/* Rule to force any i tag within password-toggle to be invisible (defensive) */
+.password-toggle i {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+}
+
+
+button[type="submit"] {
+    width: 100%;
+    background-color: #0095f6;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 0;
+    margin-top: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    opacity: 1;
+}
+
+/* "OR" Section Styling */
+.or-text-only {
+    font-size: 13px;
+    color: #8e8e8e;
+    font-weight: 600;
+    margin: 18px 0 10px;
+    text-align: center;
+}
+
+.or-line-below-fb {
+    height: 1px;
+    background-color: #363636;
+    width: calc(100% - 80px);
+    margin: 0 auto 20px;
+}
+
+/* Styling for Facebook Login Button (.fb-login) */
+.fb-login {
+    background: none;
+    border: none;
+    color: #385185;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 20px;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.fb-login i {
+    margin-right: 8px;
+    font-size: 16px;
+    vertical-align: middle;
+}
+
+.fb-login:hover {
+    text-decoration: underline;
+}
+
+/* Styling for Forgot password link (.forgot) */
+.forgot {
+    color: #a8a8a8;
+    text-decoration: none;
+    font-size: 12px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.signup-box {
+    background-color: #000;
+    border: 1px solid #262626;
+    border-radius: 1px;
+    padding: 20px 0;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 6px;
+}
+
+.signup-box p {
+    margin: 0;
+    font-size: 14px;
+    color: #fff;
+}
+
+.signup-link {
+    color: #0095f6;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+
+/* Basic Responsiveness */
+@media (max-width: 480px) {
+    .login-container {
+        width: 100%;
+        padding: 0;
+    }
+    .login-box, .signup-box {
+        border: none;
+        background-color: transparent;
+    }
+    body {
+        background-color: #000;
+    }
+    .or-line-below-fb {
+        width: calc(100% - 40px);
+        margin: 0 auto 20px;
+    }
+    form {
+        padding: 0 20px;
+    }
+}
